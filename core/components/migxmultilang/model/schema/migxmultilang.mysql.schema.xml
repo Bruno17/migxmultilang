@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="migxmultilang" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+ 
+    <object class="mmlLang" table="mml_languages" extends="xPDOSimpleObject">
+        <field key="language" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="index" />
+        <field key="lang_key" dbtype="varchar" precision="2" phptype="string" null="false" default="" index="index" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="active" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="false" default="0" />
+        <field key="properties" dbtype="text" phptype="array" null="true" />
+        
+        <composite alias="TranslatedTemplateVarResources" class="mmlTemplateVarResource" local="id" foreign="langid" cardinality="many" owner="local" />
+    </object>
+    
+    <object class="mmlTemplateVarResource" table="mml_tmplvar_contentvalues" extends="xPDOSimpleObject">
+        <field key="langid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="tmplvarid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="contentid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="value" dbtype="mediumtext" phptype="string" null="false" />
+
+        <index alias="tmplvarid" name="tmplvarid" primary="false" unique="false" type="BTREE">
+            <column key="tmplvarid" length="" collation="A" null="false" />
+        </index>
+        <index alias="contentid" name="contentid" primary="false" unique="false" type="BTREE">
+            <column key="contentid" length="" collation="A" null="false" />
+        </index>
+        <index alias="tv_cnt" name="tv_cnt" primary="false" unique="false" type="BTREE">
+            <column key="tmplvarid" length="" collation="A" null="false" />
+            <column key="contentid" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="TemplateVar" class="modTemplateVar" local="tmplvarid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Resource" class="modResource" local="contentid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Language" class="mmlLang" local="langid" foreign="id" cardinality="one" owner="foreign" />
+    </object> 
+    
+    <!-- inherit the modx resource and extend it -->
+    <object class="mmlResource" table="site_content" extends="modResource">
+        <composite alias="TranslatedTemplateVarResources" class="mmlTemplateVarResource" local="id" foreign="contentid" cardinality="many" owner="local" />
+    </object>
+ 
+</model>

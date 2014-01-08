@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="[[++modx_charset]]">
+<title>[[++site_name]] - [[+mml_pagetitle]]</title>
+<base href="[[++site_url]]">
+<link rel="icon" href="/assets/images/favicon.gif" type="image/x-icon">
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="/assets/images/favicon.gif" type="image/x-icon"> 
+<link rel="stylesheet" type="text/css" href="/assets/templates/css/minimalism.css">
+</head>
+<body>
+<div class="bg">
+<div id="container">
+<header>
+    <a href="#" id="logo"><img src="/assets/images/logo.png" width="180" height="43" alt="logo"/></a>
+    [[!mml_LangLinks]]    
+    <nav>
+        [[!pdoMenu? 
+            &startId=`0` 
+            &level=`1`
+            &includeTVs=`mml_pagetitle`
+            &prepareTVs=`1`
+            &tvPrefix=`tv.`
+            &loadModels=`migxmultilang`
+            &prepareSnippet = `mmlTranslatePdoToolsRow`
+            &tpl=`mml_MenuRowTpl`
+        ]]
+    </nav>
+</header>
+<section id="intro">
+    <hgroup>
+        <h1>"Simplicity is the ultimate sophistication"<span>- Leonardo da Vinci</span></h1>
+        <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin.Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</h2>
+    </hgroup>
+</section><!--end intro-->
+<div class="holder_content" id="maincontent">
+
+
+<h1>[[+mml_pagetitle]]</h1>
+<p>
+[[+mml_content:nl2br]]
+</p>
+
+[[*content]]
+</div><!--end holder-->
+<div class="holder_content" id="bottomcontent">
+    <section class="group4">
+    [[$latestArticle_[[++cultureKey]]]]
+    </section>
+</div><!--end holder-->
+</div><!--end container-->
+<footer>
+    <div class="container">  
+        <div id="FooterTwo"> &copy; 2011 [[++site_name]] </div>
+        <div id="FooterThree"> Valid html5, design and code by <a href="http://www.marijazaric.com">marija zaric - creative simplicity</a> </div> 
+    </div>
+</footer>
+</div><!--end bg-->
+<!-- Free template distributed by http://freehtml5templates.com -->
+</body>
+</html>
