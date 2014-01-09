@@ -68,7 +68,7 @@ class mmlFetch extends pdoFetch {
                                 $this->config['tvsJoin'][$name] = array(
                                     'class' => 'mmlTemplateVarResource',
                                     'alias' => $alias,
-                                    'on' => '`TV' . $name . '`.`contentid` = `' . $this->config['class'] . '`.`id` AND `TV' . $name . '`.`tmplvarid` = ' . $tv['id'] . ' AND `TV' . $name . '`.`langid` = ' . $lang_id,
+                                    'on' => '`TV' . $name . '`.`contentid` = `' . $this->config['class'] . '`.`id` AND `TV' . $name . '`.`tmplvarid` = ' . $tv['id'] . ' AND `TV' . $name . '`.`langid` = ' . $lang_id . ' AND `TV' . $name . '`.`published` = 1',
                                     'tv' => $tv);
                                 $this->config['tvsSelect'][$alias] = array('`mml.' . $tvPrefix . $tv['name'] . '`' => 'IFNULL(`' . $alias . '`.`value`, ' . $this->modx->quote($tv['default_text']) . ')');
                             }
