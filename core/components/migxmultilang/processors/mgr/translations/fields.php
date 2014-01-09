@@ -1,7 +1,22 @@
 <?php
 
 $resource_id = $modx->getOption('resource_id', $scriptProperties, 0);
-$main_lang = $modx->getOption('mml.main_lang');
+
+//get cultureKey - system-setting
+if ($setting = $modx->getObject('modSystemSetting',array('key'=>'cultureKey'))){
+    $cultureKey = $setting->get('value');
+}
+
+//get cultureKey - context-setting
+if ($resource = $modx->getObject('modResource',$resource_id)){
+    $context= $modx->newObject('modContext');
+    $context->_fields['key']= $resource->get('context_key');
+    if ($context->prepare()){
+        $cultureKey = isset($context->config['cultureKey']) ? $context->config['cultureKey'] : $cultureKey;    
+    }    
+}
+
+$main_lang = $cultureKey;
 
 $config = $modx->migx->customconfigs;
 $prefix = isset($config['prefix']) && !empty($config['prefix']) ? $config['prefix'] : null;

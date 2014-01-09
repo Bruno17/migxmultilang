@@ -68,7 +68,21 @@ if (isset($scriptProperties['data'])) {
 $object_id = $modx->getOption('object_id', $scriptProperties, 0);
 $resource_id = $modx->getOption('resource_id', $scriptProperties, false);
 $resource_id = !empty($co_id) ? $co_id : $resource_id;
-$main_lang = $modx->getOption('mml.main_lang');
+//get cultureKey - system-setting
+if ($setting = $modx->getObject('modSystemSetting',array('key'=>'cultureKey'))){
+    $cultureKey = $setting->get('value');
+}
+
+//get cultureKey - context-setting
+if ($resource = $modx->getObject('modResource',$resource_id)){
+    $context= $modx->newObject('modContext');
+    $context->_fields['key']= $resource->get('context_key');
+    if ($context->prepare()){
+        $cultureKey = isset($context->config['cultureKey']) ? $context->config['cultureKey'] : $cultureKey;    
+    }    
+}
+
+$main_lang = $cultureKey;
 
 
 if ($object = $modx->getObject($classname, $object_id)) {
