@@ -8,8 +8,7 @@ if (is_array($row)) {
     }
 
     $cultureKey = $modx->getOption('cultureKey');
-    $main_lang = $modx->getOption('mml.main_lang');
-    //$outrow['mml_lang_url'] = $modx->getOption('site_url');
+    $main_lang = $modx->getOption('original_cultureKey');
     
     if ($cultureKey != $main_lang) {
 

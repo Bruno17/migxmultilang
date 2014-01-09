@@ -1,4 +1,10 @@
-/* LangRouter
+/**
+ * @author Bruno Perner
+ * @copyright 2014
+ */
+
+/**
+*  LangRouter
 * ==========
 *
 * This plugin is meant to be used with Babel extra for MODX Revolution. It
@@ -122,14 +128,10 @@ if ($modx->context->get('key') != "mgr") {
     $reqCultureKeyIdx = strpos($_REQUEST['q'], '/');
     $reqCultureKey = substr($_REQUEST['q'], 0, $reqCultureKeyIdx);
 
-    
-
     # Serve the proper context and language
     if (array_key_exists(strtolower($reqCultureKey), array_change_key_case($languages))) {
         # Remove cultureKey from request
-        
-        
-        
+
         $_REQUEST['q'] = substr($_REQUEST['q'], $reqCultureKeyIdx + 1);
         $_REQUEST['cultureKey'] = $reqCultureKey;
         
@@ -141,11 +143,6 @@ if ($modx->context->get('key') != "mgr") {
         }
         
         # logRequest('Culture key found in URI');
-        /*
-        if ($id = $modx->findResource($_REQUEST['q'])) {
-            //$modx->sendForward($id);
-        }
-        */
     } else {
         $clientCultureKey = array_flip(array_intersect_key(clientLangDetect(), $languages));
         if ($clientCultureKey) {
@@ -153,21 +150,17 @@ if ($modx->context->get('key') != "mgr") {
         } else {
             $_REQUEST['cultureKey'] = trim($modx->getOption('mml.main_lang'));
         }
-        #$modx->log(modX::LOG_LEVEL_ERROR, dump($contextDefault));
-        //$modx->switchContext($contextDefault);
-        #logRequest('Culture key not found in URI');
-        //$modx->sendRedirect($modx->getOption('site_url'));
     }
 
     if (!empty($_REQUEST['cultureKey'])) {
         $_SESSION['cultureKey'] = $_REQUEST['cultureKey'];
     }
 
+    $modx->setOption('original_cultureKey', $modx->getOption('cultureKey'));
     $modx->setOption('original_site_url', $modx->getOption('site_url'));
     if (!empty($_SESSION['cultureKey'])) {
         $modx->setOption('cultureKey', $_SESSION['cultureKey']);
         $modx->setOption('site_url', $modx->getOption('site_url') . $_SESSION['cultureKey'] . '/');
-        //$modx->config['site_url'] = $modx->getOption('site_url') . $_SESSION['cultureKey'] . '/';
     }
 
 }
