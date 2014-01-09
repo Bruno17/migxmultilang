@@ -10,6 +10,8 @@ $xpdo_meta_map['mmlTemplateVarResource']= array (
     'tmplvarid' => 0,
     'contentid' => 0,
     'value' => NULL,
+    'published' => 1,
+    'totranslate' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -45,6 +47,26 @@ $xpdo_meta_map['mmlTemplateVarResource']= array (
       'dbtype' => 'mediumtext',
       'phptype' => 'string',
       'null' => false,
+    ),
+    'published' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 1,
+      'index' => 'index',
+    ),
+    'totranslate' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
     ),
   ),
   'indexes' => 

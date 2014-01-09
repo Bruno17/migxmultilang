@@ -83,7 +83,7 @@ if ($resource = $modx->getObject('modResource',$resource_id)){
 }
 
 $main_lang = $cultureKey;
-
+$default_arraydelimiter = '||';
 
 if ($object = $modx->getObject($classname, $object_id)) {
     $lang_record = $object->toArray();
@@ -123,16 +123,23 @@ if ($object = $modx->getObject($classname, $object_id)) {
                 $fields = array('tmplvarid' => $tv->get('id'),'langid' => $object->get('id'), 'contentid' => $resource_id);
             }
             
+            $cb_values = array();
+            if (isset($postvalues['mml_checkbox_'.$key]) && !empty($postvalues['mml_checkbox_'.$key])){
+                $cb_values = explode('||',$postvalues['mml_checkbox_'.$key]);
+            }
+            
             if ($tvresource = $modx->getObject($tv_classname,$fields)){
-                if (empty($value)){
+                if (count($cb_values) < 1 && empty($value)){
                     $tvresource->remove();
                 }    
             }else{
                 $tvresource = $modx->newObject($tv_classname);
                 $tvresource->fromArray($fields);
             }
-            if (!empty($value)){
+            if (count($cb_values) > 0 || !empty($value)){
                 $tvresource->set('value',$value);
+                $tvresource->set('published',in_array('published',$cb_values) ? 1 : 0);
+                $tvresource->set('totranslate',in_array('totranslate',$cb_values) ? 1 : 0);
                 $tvresource->save();
             }
         }

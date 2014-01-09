@@ -86,7 +86,8 @@ if ($object && !empty($resource_id)){
     }
     if ($main_lang == $lang_record['lang_key']){
         $tv_classname = 'modTemplateVarResource'; 
-        $where = array('contentid'=>$resource_id);       
+        $where = array('contentid'=>$resource_id);
+        $_REQUEST['is_mainlang'] = '1';       
     }else{
         $tv_classname = 'mmlTemplateVarResource';
         $where = array('langid' => $object->get('id'),'contentid'=>$resource_id);
@@ -103,7 +104,17 @@ if ($object && !empty($resource_id)){
     //$c->prepare(); echo $c->toSql();
     if ($collection = $modx->getCollection($tv_classname,$c)){
         foreach ($collection as $object){
-            $record[$object->get('TemplateVar_name')] = $object->get('value');
+            
+            $tvname = $object->get('TemplateVar_name');
+            $record[$tvname] = $object->get('value');
+            $cb_values = array();
+            if ($object->get('published') == '1'){
+                $cb_values[] = 'published';
+            }
+            if ($object->get('totranslate') == '1'){
+                $cb_values[] = 'totranslate';
+            }            
+            $record['mml_checkbox_' . $tvname] = implode('||',$cb_values);
         }
     }
     
