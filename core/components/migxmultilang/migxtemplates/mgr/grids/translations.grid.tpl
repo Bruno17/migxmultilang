@@ -56,7 +56,7 @@ MODx.grid.multiTVdbgrid{/literal}{$win_id}{literal} = function(config) {
             fn: function(grid) {
                 this.setWidth('500px');
                 //this.refresh();
-                console.log(this);    
+                //console.log(this);    
             }
         }
     },

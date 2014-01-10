@@ -10,7 +10,7 @@ if ($action == 'mgr/migxdb/fields') {
     $packagepath = $this->modx->getOption('core_path') . 'components/' . $packageName . '/';
     $modelpath = $packagepath . 'model/';
     if (is_dir($modelpath)) {
-        $this->modx->addPackage($packageName, $modelpath, $prefix);
+        $this->modx->addPackage($packageName, $modelpath);
     }
     $classname = 'mmlLang';
     $formtabs = array();
