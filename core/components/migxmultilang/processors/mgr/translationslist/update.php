@@ -93,7 +93,6 @@ $validation_errors = array();
 if ($object = $modx->getObject($classname, $object_id)) {
 
     foreach ($scriptProperties as $field => $value) {
-        $fieldid++;
         /* handles checkboxes & multiple selects elements */
         if (is_array($value)) {
             $featureInsert = array();
