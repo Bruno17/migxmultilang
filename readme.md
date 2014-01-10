@@ -174,7 +174,7 @@ Frontend Setup
 [[!pdoResources? 
 	&parents=`0` 
 	&resources=`[[*id]]` 
-	&tpl=`mml_resourceTpl` 
+	&tpl=`mml_resourceTemplate` 
 	&includeTVs=`mml_pagetitle,mml_longtitle,mml_introtext,mml_content` 
 	&prepareTVs=`1` 
 	&processTVs=`1`
@@ -184,7 +184,7 @@ Frontend Setup
 ]]
 ```
 
-### The example Content of mml_resourceTpl
+### The example Content of mml_resourceTemplate
 
 ```
 <!doctype html>
