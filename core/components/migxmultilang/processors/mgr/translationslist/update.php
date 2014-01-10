@@ -91,8 +91,6 @@ $default_arrayenclosing = $modx->getOption('arrayenclosing', $config, '');
 $validation_errors = array();
 
 if ($object = $modx->getObject($classname, $object_id)) {
-    $lang_record = $object->toArray();
-
 
     foreach ($scriptProperties as $field => $value) {
         $fieldid++;
@@ -118,37 +116,52 @@ if ($object = $modx->getObject($classname, $object_id)) {
 
     }
 
-    foreach ($postvalues as $key => $value) {
-        if ($tv = $modx->getObject('modTemplateVar', array('name' => $key))) {
-            if ($main_lang == $lang_record['lang_key']) {
+    $tmplvarid = $object->get('tmplvarid');
+    $resource_id = $object->get('contentid');
+
+    //get cultureKey - system-setting
+    if ($setting = $modx->getObject('modSystemSetting', array('key' => 'cultureKey'))) {
+        $cultureKey = $setting->get('value');
+    }
+
+    //get cultureKey - context-setting
+    if ($resource = $modx->getObject('modResource', $resource_id)) {
+        $context = $modx->newObject('modContext');
+        $context->_fields['key'] = $resource->get('context_key');
+        if ($context->prepare()) {
+            $cultureKey = isset($context->config['cultureKey']) ? $context->config['cultureKey'] : $cultureKey;
+        }
+    }
+
+    $main_lang = $cultureKey;
+    $_REQUEST['main_lang'] = $cultureKey;
+
+    $classname = 'mmlLang';
+    if ($collection = $this->modx->getCollection($classname)) {
+        foreach ($collection as $object) {
+            $lang_key = $object->get('lang_key');
+            if ($main_lang == $lang_key) {
                 $tv_classname = 'modTemplateVarResource';
-                $fields = array('tmplvarid' => $tv->get('id'), 'contentid' => $resource_id);
+                $where = array('contentid' => $resource_id);
             } else {
                 $tv_classname = 'mmlTemplateVarResource';
-                $fields = array(
-                    'tmplvarid' => $tv->get('id'),
-                    'langid' => $object->get('id'),
-                    'contentid' => $resource_id);
+                $where = array('langid' => $object->get('id'), 'contentid' => $resource_id);
             }
 
-            $cb_values = array();
-            if (isset($postvalues['mml_checkbox_' . $key]) && !empty($postvalues['mml_checkbox_' . $key])) {
-                $cb_values = explode('||', $postvalues['mml_checkbox_' . $key]);
-            }
+            $c = $modx->newQuery($tv_classname);
+            $c->where($where);
+            $c->where(array('tmplvarid' => $tmplvarid));
+            if ($tvObject = $modx->getObject($tv_classname, $c)) {
 
-            if ($tvresource = $modx->getObject($tv_classname, $fields)) {
-                if (count($cb_values) < 1 && empty($value)) {
-                    $tvresource->remove();
-                }
-            } else {
-                $tvresource = $modx->newObject($tv_classname);
-                $tvresource->fromArray($fields);
-            }
-            if (count($cb_values) > 0 || !empty($value)) {
-                $tvresource->set('value', $value);
-                $tvresource->set('published', in_array('published', $cb_values) ? 1 : 0);
-                $tvresource->set('totranslate', in_array('totranslate', $cb_values) ? 1 : 0);
-                $tvresource->save();
+                $value = $modx->getOption('mml_field_' . $lang_key, $postvalues, '');
+                $cb_values = $modx->getOption('mml_checkbox_' . $lang_key, $postvalues, '');
+                $cb_values = explode('||', $cb_values);
+
+
+                $tvObject->set('value', $value);
+                $tvObject->set('published', in_array('published', $cb_values) ? 1 : 0);
+                $tvObject->set('totranslate', in_array('totranslate', $cb_values) ? 1 : 0);
+                $tvObject->save();
             }
         }
     }
