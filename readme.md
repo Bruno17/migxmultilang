@@ -4,6 +4,10 @@ migxMultiLang is a simple to use Multi - Language - Solution for MODX Revolution
 
 **Author:** Bruno Perner b.perner@gmx.de [webcmsolutions.de](http://www.webcmsolutions.de)
 
+Thanks to Susan Ottwell https://github.com/sottwell for the idea and donation to
+make starting this project possible
+
+
 Features
 --------------------------------------------------------------------------------
 This MODX Revolution Extra is a simple to use Multi - Language - Solution.
