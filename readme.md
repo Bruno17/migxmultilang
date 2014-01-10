@@ -7,7 +7,6 @@ migxMultiLang is a simple to use Multi - Language - Solution for MODX Revolution
 Thanks to Susan Ottwell https://github.com/sottwell for the idea and donation to
 make starting this project possible
 
-
 Features
 --------------------------------------------------------------------------------
 This MODX Revolution Extra is a simple to use Multi - Language - Solution.
@@ -31,7 +30,9 @@ dynamically the translated field - values into the Template and into Listings.
 
 switching between languages is done by urls like:
 
+
 MyDomain/de/pathToResource.html
+
 MyDomain/en/pathToResource.html
 
 There are two plugins 
@@ -41,8 +42,11 @@ client-browser-language and sets this system-settings dynamically
 on OnInitCulture:
 
 `[[++cultureKey]]` - the selected cultureKey
+
 `[[++site_url]]`  - does change to site_url/en/
+
 `[[++original_cultureKey]]` - does hold the original cultureKey
+
 `[[++original_site_url]]` - does hold the original site_url
 
 mml_langRouter, which determines the correct Resource on OnPageNotFound
@@ -63,32 +67,43 @@ form.
 Requirements
 --------------------------------------------------------------------------------
 MIGX
+
 pdoTools - min-version: 1.9.0 rc2 (tested only with this version)
 
 Installation
 --------------------------------------------------------------------------------
 Install the package by MODX package-management
+
 modify the system-setting 
+
 pdoFetch.class to: `pdotools.mmlfetch`
 
 Make sure the tables get created and up to date by doing following steps:
 
 Go to the MIGX - CMP to the tab 'Package Mangager'
+
 put in Package Name: migxmultilang
+
 go to the tab 'create tables' and click 'create Tables'
 
 If you are upgrading do also the following to be sure the tables are up to date
+
 go to the tab 'Add fields' and click the button 'Add fields'
+
 go to the tab 'Update indexes' and click the button 'Update indexes'
 
 
 Backend Setup
 --------------------------------------------------------------------------------
 Go to the Menu created by migxMultiLang 'Languages'.
+
 Add your languages to the grid.
+
 Create TVs for each translatable Resource-field for example:
 
+
 mml_content, mml_introtext, mml_longtitle, mml_pagetitle
+
 you don't need to assign them to any template
 
 other textfield or textarea-fields can be translated too.
@@ -106,11 +121,15 @@ this configuraton is used to generate the translation-form.
 Create the translations - TV in a extra category, for example: 'Translations'
 
 with this setup:
+
 name: translations (you can use any name)
+
 input Type: migxdb
+
 Configurations: mml_translations,mml_translate
 
 the first is the name of the configuration from above
+
 the second one is also allways needed to render some checkboxes to each field
 into the form
 
@@ -120,15 +139,22 @@ Translate fields
 --------------------------------------------------------------------------------
 On your Resource-form, there should be now a grid with all created languages and
 a 'edit' - button for each language.
+
 Click this button, which opens the form with all translatable fields 
 (which was configured with the MIGX-configuration and exists a TV for each)
+
 Fill out the values for each language.
+
 The values for your default - language (the cultureKey within you system-setting
 or context-setting is used) are stored into the normal TV-values.
+
 The values for all other languages are stored into a custom-table.
+
 The forms for all other languages have two checkboxes on each field.
+
 to Translate - this is a marker for translators and is used as a filter in the 
 Translators - CMP
+
 published - only published fields are shown on the frontend, if fields for a
 language are unpublished or empty, the value of the default-language is used.
 
