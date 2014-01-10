@@ -68,7 +68,12 @@ Requirements
 --------------------------------------------------------------------------------
 MIGX
 
+http://modx.com/extras/package/migx
+
 pdoTools - min-version: 1.9.0 rc2 (tested only with this version)
+
+https://github.com/Bruno17/pdoTools/tree/master/packages
+
 
 Installation
 --------------------------------------------------------------------------------
