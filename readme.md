@@ -75,9 +75,9 @@ MIGX
 
 http://modx.com/extras/package/migx
 
-pdoTools - min-version: 1.9.0 rc2 (tested only with this version)
+pdoTools - min-version: 1.9.0 pl (tested only with this version)
 
-https://github.com/Bruno17/pdoTools/tree/master/packages
+http://modx.com/extras/package/pdotools
 
 
 Installation
