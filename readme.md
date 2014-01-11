@@ -10,9 +10,14 @@ make starting this project possible
 Features
 --------------------------------------------------------------------------------
 This MODX Revolution Extra is a simple to use Multi - Language - Solution.
+
 All Tranlations and Language - switchings are done on the same Resource.
+
 No Contexts or Language - Folders are needed.
+
 No special .htaccess is needed
+
+Does work with FURLs on and off
 
 How does it work
 --------------------------------------------------------------------------------
