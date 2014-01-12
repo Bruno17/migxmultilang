@@ -10,9 +10,14 @@ make starting this project possible
 Features
 --------------------------------------------------------------------------------
 This MODX Revolution Extra is a simple to use Multi - Language - Solution.
+
 All Tranlations and Language - switchings are done on the same Resource.
+
 No Contexts or Language - Folders are needed.
+
 No special .htaccess is needed
+
+Does work with FURLs on and off
 
 How does it work
 --------------------------------------------------------------------------------
@@ -70,9 +75,9 @@ MIGX
 
 http://modx.com/extras/package/migx
 
-pdoTools - min-version: 1.9.0 rc2 (tested only with this version)
+pdoTools - min-version: 1.9.0 pl (tested only with this version)
 
-https://github.com/Bruno17/pdoTools/tree/master/packages
+http://modx.com/extras/package/pdotools
 
 
 Installation
