@@ -9,10 +9,11 @@ if (is_array($row)) {
 
     $cultureKey = $modx->getOption('cultureKey');
     $main_lang = $modx->getOption('original_cultureKey');
+    $base_url = $modx->getOption('base_url');
     
     if ($cultureKey != $main_lang) {
 
-       if ($row['link'] == '/'){
+       if ($row['link'] == $base_url){
            $outrow['link'] = '';
        }
        

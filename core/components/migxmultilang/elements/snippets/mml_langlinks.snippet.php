@@ -23,22 +23,28 @@ $c = $modx->newQuery($classname);
 $output = array();
 
 if ($collection = $modx->getCollection($classname, $c)) {
+
+    if ($furls == '1') {
+        $url = $modx->makeUrl($modx->resource->get('id'));
+        $base_url = $modx->getOption('base_url');
+        $url = $modx->makeUrl($modx->resource->get('id'));
+        if ($url == $base_url) {
+            $url = '';
+        }
+        $site_url = str_replace('/' . $cultureKey . '/', '', $site_url);
+    }
+
+
     foreach ($collection as $object) {
         $lang_key = $object->get('lang_key');
         $class = ($lang_key == $cultureKey) ? 'class="active"' : '';
         $row = $object->toArray();
 
         if ($furls == '1') {
-            $url = $modx->makeUrl($modx->resource->get('id'));
-            if ($url == '/') {
-                $url = '';
-            }
             $lang_key = !empty($lang_key) ? $lang_key . '/' : '';
-            $site_url = str_replace('/' . $cultureKey . '/', '', $site_url);
             $row['link'] = rtrim($site_url, '/') . '/' . $lang_key . $url;
-        }
-        else{
-            $row['link'] = $modx->makeUrl($modx->resource->get('id'),null,'cultureKey='.$lang_key);
+        } else {
+            $row['link'] = $modx->makeUrl($modx->resource->get('id'), null, 'cultureKey=' . $lang_key);
         }
 
 
