@@ -4,7 +4,7 @@ $outputSeparator = $modx->getOption('outputSeparator', $scriptProperties, '');
 $tpl = $modx->getOption('tpl', $scriptProperties, 'mml_LinkTpl');
 
 $wrapper = '<ul class="mml_links">[[+output]]</ul>';
-$wrapper = $modx->getOption('outputSeparator', $scriptProperties, $wrapper);
+$wrapper = $modx->getOption('wrapper', $scriptProperties, $wrapper);
 
 $cultureKey = $modx->getOption('cultureKey');
 $site_url = $modx->getOption('site_url');
