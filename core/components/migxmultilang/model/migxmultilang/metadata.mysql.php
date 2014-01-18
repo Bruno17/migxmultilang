@@ -5,6 +5,8 @@ $xpdo_meta_map = array (
   array (
     0 => 'mmlLang',
     1 => 'mmlTemplateVarResource',
+    2 => 'mmlFormtabs',
+    3 => 'mmlFormtabsTemplate',
   ),
   'modResource' => 
   array (

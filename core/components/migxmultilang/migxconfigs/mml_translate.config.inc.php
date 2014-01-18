@@ -3,8 +3,8 @@
 $action = $this->modx->getOption('action', $_REQUEST, '');
 
 if ($action == 'mgr/migxdb/fields') {
-    $tabs = $this->modx->getOption('formtabs', $this->customconfigs, '');
-    $tabs = $this->modx->fromJson($tabs);
+    $tabs = $this->modx->getOption('tabs', $this->customconfigs, '');
+    //$tabs = $this->modx->fromJson($tabs);
     if (false == $this->modx->getOption('is_mainlang', $_REQUEST, false)) {
         $formtabs = array();
         foreach ($tabs as $tab) {

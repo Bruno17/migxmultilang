@@ -7,7 +7,6 @@
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
-        
         <composite alias="TranslatedTemplateVarResources" class="mmlTemplateVarResource" local="id" foreign="langid" cardinality="many" owner="local" />
     </object>
     
@@ -34,6 +33,22 @@
         <aggregate alias="Resource" class="modResource" local="contentid" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Language" class="mmlLang" local="langid" foreign="id" cardinality="one" owner="foreign" />
     </object> 
+    
+    <object class="mmlFormtabs" table="mml_formtabs" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="150" phptype="string" null="false" default="" index="index" />
+        <field key="formtabs" dbtype="text" phptype="string" null="true" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="properties" dbtype="text" phptype="array" null="true" />
+        <field key="default" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <composite alias="Templates" class="mmlFormtabsTemplate" local="id" foreign="formtabsid" cardinality="many" owner="local" />        
+    </object>
+    
+    <object class="mmlFormtabsTemplate" table="mml_formtabstemplates" extends="xPDOSimpleObject">
+        <field key="templateid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="formtabsid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <aggregate alias="template" class="modTemplate" local="templateid" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Formtabs" class="mmlFormtabs" local="formtabsid" foreign="id" cardinality="one" owner="foreign" />        
+    </object>            
     
     <!-- inherit the modx resource and extend it -->
     <object class="mmlResource" table="site_content" extends="modResource">
