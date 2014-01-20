@@ -25,8 +25,8 @@
         {
           "MIGX_id":4,
           "field":"templates",
-          "caption":"Specific Templates",
-          "description":"Each Template can have only one language-formtabs. This does remove selected templates from other formtabs!",
+          "caption":"[[%mml.specific_templates]]",
+          "description":"[[%mml.specific_templates_desc]]",
           "description_is_code":"0",
           "inputTV":"",
           "inputTVtype":"listbox-multiple",
@@ -40,7 +40,7 @@
         {
           "MIGX_id":3,
           "field":"default",
-          "caption":"Use as Default Formtabs for all other templates",
+          "caption":"[[%mml.use_as_default_formtabs]]",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -150,7 +150,7 @@
   "createdby":1,
   "createdon":"2014-01-18 07:30:55",
   "editedby":1,
-  "editedon":"2014-01-20 09:14:56",
+  "editedon":"2014-01-20 14:29:33",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

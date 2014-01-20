@@ -14,3 +14,7 @@ $_lang['mml.add_config'] = 'Add Formtabs Configuration';
 $_lang['mml.create_tvs'] = 'Create TVs';
 $_lang['mml.published'] = 'Published';
 $_lang['mml.to_translate'] = 'To translate';
+$_lang['mml.specific_templates'] = 'Specific Templates';
+$_lang['mml.specific_templates_desc'] = 'Each Template can have only one language-formtabs. This does remove selected templates from other formtabs!';
+$_lang['mml.use_as_default_formtabs'] = 'Use as Default Formtabs for all other templates';
+
