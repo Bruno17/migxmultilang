@@ -118,7 +118,7 @@
     },
     {
       "MIGX_id":1,
-      "header":"Language",
+      "header":"[[%mml.language]]",
       "dataIndex":"language",
       "width":90,
       "sortable":"false",
@@ -133,7 +133,7 @@
   "createdby":1,
   "createdon":"2014-01-06 11:40:47",
   "editedby":1,
-  "editedon":"2014-01-06 11:40:58",
+  "editedon":"2014-01-20 11:05:29",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

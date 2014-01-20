@@ -1,6 +1,13 @@
 <?php
 
 $action = $this->modx->getOption('action', $_REQUEST, '');
+$langloaded = $this->modx->getOption('langloaded', $_REQUEST, false);
+
+if (!$langloaded) {
+    $_REQUEST['langloaded'] = true;
+    $this->modx->lexicon->load('migxmultilang:default');
+    $this->loadLang('mml');
+}
 
 if ($action == 'mgr/migxdb/fields') {
     $tabs = $this->modx->getOption('tabs', $this->customconfigs, '');
@@ -17,7 +24,7 @@ if ($action == 'mgr/migxdb/fields') {
                         $newfield = array();
                         $newfield['field'] = 'mml_checkbox_' . $field['field'];
                         $newfield['inputTVtype'] = 'mml_checkboxes';
-                        $newfield['inputOptionValues'] = 'published==published||To translate==totranslate';
+                        $newfield['inputOptionValues'] = $this->modx->lexicon('mml.published') . '==published||' . $this->modx->lexicon('mml.to_translate') . '==totranslate';
                         $tabfields[] = $newfield;
                     }
                 }

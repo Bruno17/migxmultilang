@@ -67,6 +67,11 @@ else{
     $record = array();
 }
 
+if (!empty($_REQUEST['tempParams']) && $_REQUEST['tempParams'] == 'raw') {
+    $formtabs = $modx->migx->recursive_decode($modx->fromJson($record['formtabs']));
+    $record['formtabs'] = $modx->migx->indent($modx->toJson($formtabs));    
+}
+
 if ($t_collection = $object->getMany('Templates')){
     $templates = array();
     foreach ($t_collection as $t_object){
