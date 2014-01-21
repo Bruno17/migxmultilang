@@ -33,6 +33,21 @@
         "default":""
       },
       {
+        "MIGX_id":6,
+        "field":"mml_menutitle",
+        "caption":"Menutitle",
+        "description":"",
+        "description_is_code":"0",
+        "inputTV":"",
+        "inputTVtype":"",
+        "validation":"",
+        "configs":"",
+        "sourceFrom":"config",
+        "sources":"[]",
+        "inputOptionValues":"",
+        "default":""
+      },
+      {
         "MIGX_id":5,
         "field":"mml_introtext",
         "caption":"Summary (introtext)",
