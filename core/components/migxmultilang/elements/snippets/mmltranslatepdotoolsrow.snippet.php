@@ -7,7 +7,6 @@ if (is_array($row)) {
             $row[$tvname] = $value;
         }
     }
-    $resourcefields=array('pagetitle','longtitle','introtext','description','menutitle','content');
     //copy translated values to resourcefields, if not empty
     $tvPrefix = $modx->getOption('tvPrefix',$pdoTools->config,'');
     $translateResourcefields = $modx->getOption('translateResourcefields',$pdoTools->config,'1');

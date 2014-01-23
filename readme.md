@@ -10,14 +10,9 @@ make starting this project possible
 Features
 --------------------------------------------------------------------------------
 This MODX Revolution Extra is a simple to use Multi - Language - Solution.
-
 All Tranlations and Language - switchings are done on the same Resource.
-
 No Contexts or Language - Folders are needed.
-
 No special .htaccess is needed
-
-Does work with FURLs on and off
 
 How does it work
 --------------------------------------------------------------------------------
@@ -65,20 +60,18 @@ table
 There is a second tab at this CMP, whith a list of Resources and its untranslated
 fields, which can be used for translators.
 
+The third Tab 'Form Manager' has a CMP to manage different Translate-forms.
+Each form can be assigned to one or more Templates or can be marked as the 'default form'
+
 At the Resources a custom-MIGX-TV-type is used, which lists all languages with a
 button to edit all translatable fields in a MIGX-modal-window with a configurable
 form.
 
 Requirements
 --------------------------------------------------------------------------------
-MIGX
+MIGX - min-version: 2.6.2 pl
 
-http://modx.com/extras/package/migx
-
-pdoTools - min-version: 1.9.0 pl (tested only with this version)
-
-http://modx.com/extras/package/pdotools
-
+pdoTools - min-version: 1.9.0 rc2 (tested only with this version)
 
 Installation
 --------------------------------------------------------------------------------
@@ -105,28 +98,23 @@ go to the tab 'Update indexes' and click the button 'Update indexes'
 
 Backend Setup
 --------------------------------------------------------------------------------
-Go to the Menu created by migxMultiLang 'Languages'.
+Go to the Menu created by migxMultiLang 'migxMultiLang'.
 
 Add your languages to the grid.
 
-Create TVs for each translatable Resource-field for example:
+Go to the Tab 'Form Manager'
 
+Click 'Import Configurations'
 
-mml_content, mml_introtext, mml_longtitle, mml_pagetitle
+Edit this Configuration and set 
+'Use as Default Formtabs for all other templates' to 'yes'
+
+Click 'Create TVs' - this step does create all TVs, which are defined in that form
 
 you don't need to assign them to any template
 
-other textfield or textarea-fields can be translated too.
-
-There is a example MIGX - configuration, which can be imported and used to get
-you first translation form.
-
-To import this configuration, go to the MIGX - CMP to the tab 'MIGX'
-Click 'Import from package'
-put 'migxmultilang' into the Package - field and click 'OK'
-
-there should be now a MIGX - configuration with the name 'mml_translations'
-this configuraton is used to generate the translation-form.
+If you want create different Translation - Forms for different Templates, you can do it here.
+Don't forget to click 'Create TVs' if you have additional translatable TVs added to your form.
 
 Create the translations - TV in a extra category, for example: 'Translations'
 
@@ -136,14 +124,14 @@ name: translations (you can use any name)
 
 input Type: migxdb
 
-Configurations: mml_translations,mml_translate
+Configurations: mml_translations:migxmultilang,mml_translate:migxmultilang
 
-the first is the name of the configuration from above
+the first is the name of the migx-configuration, which does automatically load our formtabs-configutation assigned to the current template, or our default-formtab
 
-the second one is also allways needed to render some checkboxes to each field
+the second one is also allways needed to render some checkboxes (published, to translate) to each field
 into the form
 
-assign this TV to your template(s)
+assign this TV to your template(s), which should be translatable
 
 Translate fields
 --------------------------------------------------------------------------------
@@ -176,20 +164,21 @@ Frontend Setup
 ### The Content of your Template
 
 ```
-[[!pdoResources? 
-	&parents=`0` 
-	&resources=`[[*id]]` 
-	&tpl=`mml_resourceTemplate` 
-	&includeTVs=`mml_pagetitle,mml_longtitle,mml_introtext,mml_content` 
-	&prepareTVs=`1` 
-	&processTVs=`1`
-        &tvPrefix=`` 
-	&loadModels=`migxmultilang`
-        &prepareSnippet = `mmlTranslatePdoToolsRow`
+[[!mmlCache?
+  &element=`pdoResources`
+  &parents=`0` 
+  &resources=`[[*id]]` 
+  &tpl=`mml_resourceTemplate` 
+  &includeTVs=`[[mmlGetTemplateTVs]]` 
+  &prepareTVs=`1` 
+  &processTVs=`1`
+  &tvPrefix=`` 
+  &loadModels=`migxmultilang`
+  &prepareSnippet = `mmlTranslatePdoToolsRow`
 ]]
 ```
 
-### The example Content of mml_resourceTemplate
+### The example Content of resourceTpl
 
 ```
 <!doctype html>
@@ -251,6 +240,12 @@ Frontend Setup
 
 Notes
 --------------------------------------------------------------------------------
+instaed of using the TV-placeholders for resourcefields like [[+mml_pagetitle]] [[+mml_longtitle]] [[+mml_content]]
+you can just use [[+pagetitle]] [[+longtitle]] [[+content]]
+they are also translated with the values of the current language by default.
+In this case you would not fill out the translations for the default-language, but you would use the default resource-fields.
+
+
 replace all getResourses - calls with pdoResources
 and put allways these properties:
 
