@@ -23,6 +23,28 @@
           "default":""
         },
         {
+          "MIGX_id":2,
+          "field":"formtabs",
+          "caption":"Formtabs",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"migx",
+          "validation":"",
+          "configs":"migxformtabs",
+          "sourceFrom":"config",
+          "sources":"[]",
+          "inputOptionValues":"",
+          "default":""
+        }
+      ]
+    },
+    {
+      "MIGX_id":2,
+      "caption":"Settings",
+      "print_before_tabs":"0",
+      "fields":[
+        {
           "MIGX_id":4,
           "field":"templates",
           "caption":"[[%mml.specific_templates]]",
@@ -53,19 +75,34 @@
           "default":"0"
         },
         {
-          "MIGX_id":2,
-          "field":"formtabs",
-          "caption":"Formtabs",
+          "MIGX_id":5,
+          "field":"properties.hide_defaultlang",
+          "caption":"[[%mml.hide_default_lang]]",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
-          "inputTVtype":"migx",
+          "inputTVtype":"checkbox",
           "validation":"",
-          "configs":"migxformtabs",
+          "configs":"",
+          "sourceFrom":"config",
+          "sources":"[]",
+          "inputOptionValues":"yes==1",
+          "default":"0"
+        },
+        {
+          "MIGX_id":6,
+          "field":"properties.hide_defaultlang_fields",
+          "caption":"[[%mml.hide_default_lang_fields]]",
+          "description":"[[%mml.hide_default_lang_fields_desc]]",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
           "sourceFrom":"config",
           "sources":"[]",
           "inputOptionValues":"",
-          "default":""
+          "default":"0"
         }
       ]
     }
@@ -150,7 +187,7 @@
   "createdby":1,
   "createdon":"2014-01-18 07:30:55",
   "editedby":1,
-  "editedon":"2014-01-20 14:29:33",
+  "editedon":"2014-01-24 07:48:50",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,
