@@ -3,6 +3,11 @@
 $action = $this->modx->getOption('action', $_REQUEST, '');
 $langloaded = $this->modx->getOption('langloaded', $_REQUEST, false);
 
+$packageName = 'migxmultilang';
+$packagepath = $this->modx->getOption('core_path') . 'components/' . $packageName . '/';
+$modelpath = $packagepath . 'model/';
+$this->modx->addPackage($packageName, $modelpath);
+
 if (!$langloaded) {
     $_REQUEST['langloaded'] = true;
     $this->modx->lexicon->load('migxmultilang:default');
