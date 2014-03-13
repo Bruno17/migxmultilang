@@ -10,7 +10,7 @@ $xpdo_meta_map['mmlFormtabs']= array (
     'formtabs' => NULL,
     'createdon' => NULL,
     'properties' => NULL,
-    'default' => 1,
+    'default' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -48,7 +48,7 @@ $xpdo_meta_map['mmlFormtabs']= array (
       'attributes' => 'unsigned',
       'phptype' => 'integer',
       'null' => false,
-      'default' => 1,
+      'default' => 0,
       'index' => 'index',
     ),
   ),

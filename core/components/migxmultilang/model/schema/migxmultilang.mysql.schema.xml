@@ -7,6 +7,7 @@
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="properties" dbtype="text" phptype="array" null="true" />
+        <field key="pos" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <composite alias="TranslatedTemplateVarResources" class="mmlTemplateVarResource" local="id" foreign="langid" cardinality="many" owner="local" />
     </object>
     

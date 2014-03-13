@@ -11,6 +11,7 @@ $xpdo_meta_map['mmlLang']= array (
     'createdon' => NULL,
     'active' => 0,
     'properties' => NULL,
+    'pos' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -52,6 +53,15 @@ $xpdo_meta_map['mmlLang']= array (
       'dbtype' => 'text',
       'phptype' => 'array',
       'null' => true,
+    ),
+    'pos' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
     ),
   ),
   'composites' => 

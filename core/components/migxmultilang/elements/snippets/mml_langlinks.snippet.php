@@ -22,6 +22,8 @@ $classname = 'mmlLang';
 $c = $modx->newQuery($classname);
 $output = array();
 
+$c->sortby('pos');
+
 if ($collection = $modx->getCollection($classname, $c)) {
 
     if ($furls == '1') {
