@@ -20,3 +20,4 @@ $_lang['mml.use_as_default_formtabs'] = 'Als Standard Konfiguration für alle an
 $_lang['mml.hide_default_lang'] = 'Hauptsprache im Übersetzungs - Grid verbergen';
 $_lang['mml.hide_default_lang_fields'] = 'Einige Felder in Hauptsprache verbergen';
 $_lang['mml.hide_default_lang_fields_desc'] = 'Komma - getrennte Liste der Feldnamen';
+$_lang['mml.order_position'] = 'Sortierung';

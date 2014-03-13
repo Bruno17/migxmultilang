@@ -20,3 +20,4 @@ $_lang['mml.use_as_default_formtabs'] = 'Use as Default Formtabs for all other t
 $_lang['mml.hide_default_lang'] = 'Hide default language from Translations - grid';
 $_lang['mml.hide_default_lang_fields'] = 'Hide some fields from default language';
 $_lang['mml.hide_default_lang_fields_desc'] = 'Comma - separated list of fieldnames';
+$_lang['mml.order_position'] = 'Position';
