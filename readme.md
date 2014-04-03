@@ -258,3 +258,7 @@ and put allways these properties:
 
 you can of course allways use lexicon-tags, which will get translated into the selected language
 
+If you have contexts, where no translation and site_url - changes should happen use the context-setting
+
+```mml.do_translate``` with a value of ```0```
+
