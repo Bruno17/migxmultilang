@@ -6,8 +6,8 @@
 function duplicateTranslations($oldResource, $newResource, $duplicateChildren, $prefixDuplicate, $classname)
 {
     global $modx;
-    echo $old_id = $oldResource->get('id');
-    echo $new_id = $newResource->get('id');
+    $old_id = $oldResource->get('id');
+    $new_id = $newResource->get('id');
 
     $c = $modx->newQuery($classname);
     $c->where(array('contentid' => $old_id));

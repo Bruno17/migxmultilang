@@ -49,10 +49,10 @@ if ($modx->context->get('key') != "mgr") {
     * Debugs request handling
     */
     if (!function_exists('logRequest')) {
-        function logRequest($message = 'Request') {
+        function logRequest($message = 'Request')
+        {
             global $modx;
-            $modx->log(modX::LOG_LEVEL_ERROR, $message . ':' . "\n REQUEST_URI: " . $_SERVER['REQUEST_URI'] . "\n REDIRECT_URI: " . $_SERVER['REDIRECT_URI'] . "\n QUERY_STRING: " . $_SERVER['QUERY_STRING'] . "\n q: " .
-                $_REQUEST['q'] . "\n Context: " . $modx->context->get('key') . "\n Site start: " . $modx->context->getOption('site_start'));
+            $modx->log(modX::LOG_LEVEL_ERROR, $message . ':' . "\n REQUEST_URI: " . $_SERVER['REQUEST_URI'] . "\n REDIRECT_URI: " . $_SERVER['REDIRECT_URI'] . "\n QUERY_STRING: " . $_SERVER['QUERY_STRING'] . "\n q: " . $_REQUEST['q'] . "\n Context: " . $modx->context->get('key') . "\n Site start: " . $modx->context->getOption('site_start'));
         }
     }
 
@@ -61,7 +61,8 @@ if ($modx->context->get('key') != "mgr") {
     * Dumps variables to MODX log
     */
     if (!function_exists('dump')) {
-        function dump($var) {
+        function dump($var)
+        {
             ob_start();
             var_dump($var);
             return ob_get_clean();
@@ -74,7 +75,8 @@ if ($modx->context->get('key') != "mgr") {
     * by importance (q factor)
     */
     if (!function_exists('clientLangDetect')) {
-        function clientLangDetect() {
+        function clientLangDetect()
+        {
             $langs = array();
 
             if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
@@ -98,80 +100,112 @@ if ($modx->context->get('key') != "mgr") {
             }
         }
     }
-
     $furls = $modx->getOption('friendly_urls');
+    switch ($modx->event->name) {
 
-    if (isset($_REQUEST['cultureKey'])) {
+        case 'OnInitCulture':
 
-    } elseif ($furls != '1' && isset($_SESSION['cultureKey'])) {
-        
-        $_REQUEST['cultureKey'] = $_SESSION['cultureKey'];       
-        
-    } else {
-        #logRequest('Unhandled request');
 
-        # Get languages and their cultureKeys
+            if (isset($_REQUEST['cultureKey'])) {
 
-        $languages = array();
-        $packageName = 'migxmultilang';
+            } elseif ($furls != '1' && isset($_SESSION['cultureKey'])) {
 
-        $packagepath = $modx->getOption('core_path') . 'components/' . $packageName . '/';
-        $modelpath = $packagepath . 'model/';
-        if (is_dir($modelpath)) {
-            $modx->addPackage($packageName, $modelpath, $prefix);
-        }
-        $classname = 'mmlLang';
-
-        $c = $modx->newQuery($classname);
-
-        if ($collection = $modx->getCollection($classname, $c)) {
-            foreach ($collection as $object) {
-                $lang_key = $object->get('lang_key');
-                $row = $object->toArray();
-                $languages[$lang_key] = $row;
-            }
-        }
-
-        # Determine language from request
-        $reqCultureKeyIdx = strpos($_REQUEST['q'], '/');
-        $reqCultureKey = substr($_REQUEST['q'], 0, $reqCultureKeyIdx);
-
-        # Serve the proper context and language
-        if (array_key_exists(strtolower($reqCultureKey), array_change_key_case($languages))) {
-            # Remove cultureKey from request
-
-            $_REQUEST['q'] = substr($_REQUEST['q'], $reqCultureKeyIdx + 1);
-            $_REQUEST['cultureKey'] = $reqCultureKey;
-
-            if ($_REQUEST['q']) {
+                $_REQUEST['cultureKey'] = $_SESSION['cultureKey'];
 
             } else {
-                // $_REQUEST['q'] shouldn't be empty
-                $_REQUEST['q'] = '_mml_home';
+                #logRequest('Unhandled request');
+
+                # Get languages and their cultureKeys
+
+                $languages = array();
+                $packageName = 'migxmultilang';
+
+                $packagepath = $modx->getOption('core_path') . 'components/' . $packageName . '/';
+                $modelpath = $packagepath . 'model/';
+                if (is_dir($modelpath)) {
+                    $modx->addPackage($packageName, $modelpath, $prefix);
+                }
+                $classname = 'mmlLang';
+
+                $c = $modx->newQuery($classname);
+
+                if ($collection = $modx->getCollection($classname, $c)) {
+                    foreach ($collection as $object) {
+                        $lang_key = $object->get('lang_key');
+                        $row = $object->toArray();
+                        $languages[$lang_key] = $row;
+                    }
+                }
+
+                # Determine language from request
+                $reqCultureKeyIdx = strpos($_REQUEST['q'], '/');
+                $reqCultureKey = substr($_REQUEST['q'], 0, $reqCultureKeyIdx);
+
+                # Serve the proper context and language
+                if (array_key_exists(strtolower($reqCultureKey), array_change_key_case($languages))) {
+                    # Remove cultureKey from request
+
+                    $_REQUEST['q'] = substr($_REQUEST['q'], $reqCultureKeyIdx + 1);
+                    $_REQUEST['cultureKey'] = $reqCultureKey;
+
+                    if ($_REQUEST['q']) {
+
+                    } else {
+                        // $_REQUEST['q'] shouldn't be empty
+                        $_REQUEST['q'] = '_mml_home';
+                    }
+
+                    # logRequest('Culture key found in URI');
+                } else {
+                    $clientCultureKey = array_flip(array_intersect_key(clientLangDetect(), $languages));
+                    if ($clientCultureKey) {
+                        $_REQUEST['cultureKey'] = current($clientCultureKey);
+                    } else {
+                        $_REQUEST['cultureKey'] = trim($modx->getOption('cultureKey'));
+                    }
+                }
             }
 
-            # logRequest('Culture key found in URI');
-        } else {
-            $clientCultureKey = array_flip(array_intersect_key(clientLangDetect(), $languages));
-            if ($clientCultureKey) {
-                $_REQUEST['cultureKey'] = current($clientCultureKey);
-            } else {
-                $_REQUEST['cultureKey'] = trim($modx->getOption('cultureKey'));
+            $_SESSION['mml_settings'] = array();
+            if (!empty($_REQUEST['cultureKey'])) {
+                $_SESSION['cultureKey'] = $_REQUEST['cultureKey'];
+                $_SESSION['mml_settings']['cultureKey'] = $_REQUEST['cultureKey'];
             }
-        }
-    }
 
-    if (!empty($_REQUEST['cultureKey'])) {
-        $_SESSION['cultureKey'] = $_REQUEST['cultureKey'];
-    }
-
-    $modx->setOption('original_cultureKey', $modx->getOption('cultureKey'));
-    $modx->setOption('original_site_url', $modx->getOption('site_url'));
-    if (!empty($_SESSION['cultureKey'])) {
-        $modx->setOption('cultureKey', $_SESSION['cultureKey']);
-        if ($furls == '1') {
+            /*
+            $modx->setOption('original_cultureKey', $modx->getOption('cultureKey'));
+            $modx->setOption('original_site_url', $modx->getOption('site_url'));
+            if (!empty($_SESSION['cultureKey'])) {
+            $modx->setOption('cultureKey', $_SESSION['cultureKey']);
+            if ($furls == '1') {
             $modx->setOption('site_url', $modx->getOption('site_url') . $_SESSION['cultureKey'] . '/');
-        }
-    }
+            }
+            }
+            */
 
+            break;
+
+        case 'OnLoadWebDocument':
+
+            $do_translate = $modx->getOption('mml.do_translate', null, 1);
+
+            if (!empty($do_translate)) {
+                if (isset($_SESSION['mml_settings']) && !empty($_SESSION['mml_settings']['cultureKey'])) {
+                    $mml_settings = $_SESSION['mml_settings'];
+                    $mml_settings['original_cultureKey'] = $modx->getOption('cultureKey');
+                    $mml_settings['original_site_url'] = $modx->getOption('site_url');
+                    if ($furls == '1') {
+                        $mml_settings['site_url'] = $modx->getOption('site_url') . $_SESSION['mml_settings']['cultureKey'] . '/';
+                    }
+                    $modx->setPlaceholders($mml_settings, '+');
+                    foreach ($mml_settings as $key => $value) {
+                        $modx->setOption($key, $value);
+                    }
+
+                }
+            }
+
+            break;
+
+    }
 }
