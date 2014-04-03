@@ -20,7 +20,8 @@ class mmlFetch extends pdoFetch {
 
         $lang_id = 0;
         $cultureKey = $this->modx->getOption('cultureKey', $this->config, $this->modx->getOption('cultureKey'));
-        $main_lang = $this->modx->getOption('mml.main_lang');
+        //$main_lang = $this->modx->getOption('mml.main_lang');
+        $main_lang = $this->modx->getOption('original_cultureKey');
 
         if ($cultureKey != $main_lang && $langObject = $this->modx->getObject('mmlLang', array('lang_key' => $cultureKey))) {
            $lang_id = $langObject->get('id');
