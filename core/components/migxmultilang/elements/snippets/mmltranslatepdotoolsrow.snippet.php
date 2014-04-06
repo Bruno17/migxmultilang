@@ -21,6 +21,7 @@ if (is_array($row)) {
     } 
      
     foreach ($resourcefields as $field){
+
         if (!empty($row[$tvPrefix.'mml_' . $field])){
             $outrow[$field] = $row[$tvPrefix.'mml_' . $field];
         }
