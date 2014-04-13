@@ -4,6 +4,7 @@
     <object class="mmlLang" table="mml_languages" extends="xPDOSimpleObject">
         <field key="language" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="index" />
         <field key="lang_key" dbtype="varchar" precision="2" phptype="string" null="false" default="" index="index" />
+        <field key="lang_dir" dbtype="varchar" precision="3" phptype="string" null="false" default="ltr" />        
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="properties" dbtype="text" phptype="array" null="true" />

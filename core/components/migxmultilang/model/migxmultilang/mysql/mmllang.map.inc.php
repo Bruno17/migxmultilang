@@ -8,6 +8,7 @@ $xpdo_meta_map['mmlLang']= array (
   array (
     'language' => '',
     'lang_key' => '',
+    'lang_dir' => 'ltr',
     'createdon' => NULL,
     'active' => 0,
     'properties' => NULL,
@@ -32,6 +33,14 @@ $xpdo_meta_map['mmlLang']= array (
       'null' => false,
       'default' => '',
       'index' => 'index',
+    ),
+    'lang_dir' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '3',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'ltr',
     ),
     'createdon' => 
     array (

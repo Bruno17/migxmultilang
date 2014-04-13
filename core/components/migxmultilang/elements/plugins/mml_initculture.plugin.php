@@ -168,8 +168,10 @@ if ($modx->context->get('key') != "mgr") {
 
             $_SESSION['mml_settings'] = array();
             if (!empty($_REQUEST['cultureKey'])) {
+                $language = $languages[$_REQUEST['cultureKey']];
                 $_SESSION['cultureKey'] = $_REQUEST['cultureKey'];
                 $_SESSION['mml_settings']['cultureKey'] = $_REQUEST['cultureKey'];
+                $_SESSION['mml_settings']['lang_dir'] = $language['lang_dir'];
             }
 
             /*

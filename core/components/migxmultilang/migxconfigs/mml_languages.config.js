@@ -34,6 +34,22 @@
           "sources":"[]",
           "inputOptionValues":"",
           "default":""
+        },
+        {
+          "MIGX_id":3,
+          "field":"lang_dir",
+          "caption":"Lang Direction",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"[]",
+          "inputOptionValues":"ltr||rtl",
+          "default":"ltr"
         }
       ]
     }
@@ -50,7 +66,10 @@
     "maxRecords":"",
     "addNewItemAt":"bottom",
     "multiple_formtabs":"",
+    "actionbuttonsperrow":4,
+    "winbuttonslist":"",
     "extrahandlers":"this.handlePositionSelector",
+    "filtersperrow":4,
     "packageName":"migxmultilang",
     "classname":"mmlLang",
     "task":"",
@@ -131,7 +150,7 @@
   "createdby":1,
   "createdon":"2014-01-06 11:39:28",
   "editedby":1,
-  "editedon":"2014-03-13 13:12:22",
+  "editedon":"2014-04-13 06:22:03",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,
