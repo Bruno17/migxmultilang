@@ -1,7 +1,5 @@
 <?php
 
-echo 'huhu';
-
 require MODX_CORE_PATH . 'components/pdotools/model/pdotools/pdofetch.class.php';
 
 class mmlFetch extends pdoFetch {
