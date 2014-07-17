@@ -1,3 +1,4 @@
+<?php
 if (is_array($row)) {
 
     $cultureKey = $modx->getOption('cultureKey');

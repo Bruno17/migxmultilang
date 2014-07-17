@@ -1,3 +1,4 @@
+<?php
 $get_tvs_fromformtabs = $modx->getOption('get_tvs_fromformtabs', $scriptProperties, 1);
 $get_tvs_fromtemplate = $modx->getOption('get_tvs_fromtemplate', $scriptProperties, 1);
 

@@ -1,3 +1,4 @@
+<?php
 //[[!mmlLangLinks]]
 
 $outputSeparator = $modx->getOption('outputSeparator', $scriptProperties, '');

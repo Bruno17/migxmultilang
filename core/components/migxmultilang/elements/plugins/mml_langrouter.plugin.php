@@ -1,3 +1,4 @@
+<?php
 if ($modx->context->get('key') != "mgr") {
     
     if ($id = $modx->findResource($_REQUEST['q'])) {

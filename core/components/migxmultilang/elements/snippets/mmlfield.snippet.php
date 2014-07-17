@@ -1,3 +1,4 @@
+<?php
 /*
 does only work after this commits/pulls: 
 https://github.com/bezumkin/pdoTools/commit/1f4ae742a27c69b5e299d7f1ffa75b2cd367c616

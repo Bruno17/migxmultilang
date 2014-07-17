@@ -1,3 +1,4 @@
+<?php
 /**
  * Cache the output of any MODx Element using a configurable cacheHandler
  *
