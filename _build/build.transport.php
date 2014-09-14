@@ -296,7 +296,6 @@ $sources = array(
     'utilities' => $root . '_build/utilities/',
     /* note that the next two must not have a trailing slash */
     'source_core' => $root . 'core/components/' . PKG_NAME_LOWER,
-    'source_core_model' => $root . 'core/model/',
     'source_assets' => $root . 'assets/components/' . PKG_NAME_LOWER,
     'resolvers' => $root . '_build/resolvers/',
     'validators' => $root . '_build/validators/',
@@ -330,8 +329,6 @@ $menuprops = isset($props['menus']) ? $modx->fromJson($props['menus']) : '';
 $hasAssets = is_dir($sources['source_assets']);
 /* Transfer the files in the assets dir. */
 $hasCore = is_dir($sources['source_core']);
-/* Transfer the files in the core dir. */
-$hasCoreModel = is_dir($sources['source_core_model']);
 /* Transfer the files in the core dir. */
 
 $hasContexts = file_exists($sources['data'] . 'transport.contexts.php');
@@ -774,13 +771,10 @@ foreach ($categories as $k => $cat) {
             ));
     }
     
-    if ($hasCoreModel && $i == 1) {
-        $helper->sendLog(modX::LOG_LEVEL_INFO, $modx->lexicon('mc_packaged_core_model_files'));
-        $vehicle->resolve('file', array(
-            'source' => $sources['source_core_model'],
-            'target' => "return MODX_CORE_PATH ;",
-            ));
-    }    
+    $vehicle->resolve('file', array(
+        'source' => $sources['root'] . 'core/model/modx/pdotools/mmlfetch.class.php',
+        'target' => "return MODX_CORE_PATH . 'model/modx/pdotools/';",
+        ));
 
     /* This section transfers every file in the local
     mycomponents/mycomponent/assets directory to the

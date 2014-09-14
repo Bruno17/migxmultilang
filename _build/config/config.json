@@ -2,7 +2,7 @@
   "id":1,
   "package":"migxMultiLang",
   "packageDescription":"",
-  "version":"1.0.7",
+  "version":"1.0.8",
   "release":"pl",
   "menus":"[{\"MIGX_id\":\"1\",\"text\":\"migxMultiLang\",\"parent\":\"\",\"description\":\"\",\"icon\":\"\",\"menuindex\":\"\",\"params\":\"&configs=mml_languages:migxmultilang||mml_translationslist:migxmultilang||mml_formtabs:migxmultilang\",\"handler\":\"\",\"permissions\":\"\",\"action.id\":\"\",\"action.namespace\":\"\",\"action.controller\":\"\",\"action.haslayout\":\"0\",\"action.lang_topics\":\"\",\"action.assets\":\"\"}]"
 }
