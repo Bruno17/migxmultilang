@@ -152,6 +152,7 @@ Ext.extend(MODx.grid.multiTVdbgrid{/literal}{$win_id}{literal},MODx.grid.Grid,{
         
  		
         var win_xtype = 'modx-window-tv-dbitem-update-{/literal}{$win_id}{literal}';
+        this.windows[win_xtype] = null;
 		
         if (this.windows[win_xtype]){
 			this.windows[win_xtype].fp.autoLoad.params.tv_id='{/literal}{$tv_id}{literal}';
